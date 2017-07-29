@@ -1,1 +1,1 @@
-web: ruby kittybot.rb
+worker: ruby kittybot.rb
