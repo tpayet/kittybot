@@ -1,5 +1,4 @@
 require 'slack-ruby-client'
-require 'byebug'
 
 def define_user(users_list, u_id)
   users_list[u_id]
