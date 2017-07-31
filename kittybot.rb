@@ -1,4 +1,5 @@
 require 'slack-ruby-client'
+require 'pp'
 
 def define_user(users_list, u_id)
   users_list[u_id]
@@ -7,6 +8,10 @@ end
 # Configure slack client for connection
 Slack.configure do |config|
   config.token = ENV['SLACK_API_TOKEN']
+end
+
+def react(client, data, emoji)
+  client.reactions_add(name: emoji, timestamp: data.ts, channel: data.channel)
 end
 
 # Use web client to get list of users, web_client will be used to send reactions
@@ -19,12 +24,12 @@ realtime_client = Slack::RealTime::Client.new
 
 realtime_client.on :message do |data|
   user = define_user(users_by_id, data.user)
+  p "#{user}: #{data.text}"
   case user
   when 'saf'
     web_client.reactions_add name: 'kitty', timestamp: data.ts, channel: data.channel
-  when 'tpayet'
-    p data.text
   end
+  web_client.reactions_add(name: 'curqui', timestamp: data.ts, channel: data.channel) if Time.now.hour.between?(1, 6)
 end
 
 realtime_client.start!
