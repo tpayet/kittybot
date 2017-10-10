@@ -29,7 +29,10 @@ realtime_client.on :message do |data|
   when 'saf'
     web_client.reactions_add name: 'kitty', timestamp: data.ts, channel: data.channel
   end
-  web_client.reactions_add(name: 'curqui', timestamp: data.ts, channel: data.channel) if Time.now.hour.between?(1, 6)
+  case data.text
+  when /(?i)(php|js|javascript)/
+    web_client.reactions_add name: 'poop', timestamp: data.ts, channel: data.channel
+  end
 end
 
 realtime_client.start!
