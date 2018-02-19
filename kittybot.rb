@@ -30,7 +30,7 @@ realtime_client.on :message do |data|
     web_client.reactions_add name: 'kitty', timestamp: data.ts, channel: data.channel
   end
   case data.text
-  when /(?i)( (php|js|javascript) )/
+  when /(?i)(\b|^)(php|js|javascript|mongo|mongodb)(\b|$)/
     web_client.reactions_add name: 'poop', timestamp: data.ts, channel: data.channel
   end
 end
