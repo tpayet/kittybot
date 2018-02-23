@@ -1,1 +1,1 @@
-worker: ruby kittybot.rb
+worker: npm start
