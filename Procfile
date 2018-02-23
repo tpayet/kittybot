@@ -1,1 +1,0 @@
-worker: ruby kittybot.rb
